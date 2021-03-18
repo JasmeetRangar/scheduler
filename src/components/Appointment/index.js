@@ -20,13 +20,18 @@ export default function Appointment(props) {
          />
                   {mode === EMPTY && (
             <Empty
-               onAdd={() => console.log("Clicked onAdd")} 
+               onAdd={() => transition(CREATE)} 
             />
          )}
          {mode === SHOW && (
             <Show
                student={props.interview.student}
                interviewer={props.interview.interviewer} 
+            />
+         )}
+         {mode === CREATE && (
+            <Form
+               interviewers={[]}
             />
          )}
       </article>
