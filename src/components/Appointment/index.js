@@ -4,9 +4,11 @@ import "./styles.scss";
 import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
 import Header from "components/Appointment/Header";
+import Form from "components/Appointment/Form";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
+const CREATE = "CREATE";
 export default function Appointment(props) {
    const { mode, transition, back } = useVisualMode(
       props.interview ? SHOW : EMPTY
@@ -32,6 +34,7 @@ export default function Appointment(props) {
          {mode === CREATE && (
             <Form
                interviewers={[]}
+               onCancel={() => back()}
             />
          )}
       </article>
