@@ -1,4 +1,4 @@
-function getAppointmentsForDay(state, day) {
+const getAppointmentsForDay = (state, day) => {
   const days = [...state.days];
   const appointments = {...state.appointments};
   let results = [];
@@ -12,4 +12,15 @@ function getAppointmentsForDay(state, day) {
 
   return results;
 }
-export {getAppointmentsForDay}
+const getInterview = (state, interview) => {
+  const interviewers = { ... state.interviewers };
+  if (!interview) return null;
+  const interviewerId = interview.interviewer;
+  for (const interviewer in interviewers) {
+    if (interviewers[interviewer]["id"] === interviewerId) {
+      return { ... interview, interviewer: interviewers[interviewer] };
+    }
+  }
+  return null;
+}
+export {getAppointmentsForDay, getInterview}
