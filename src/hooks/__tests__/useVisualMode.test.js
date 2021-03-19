@@ -39,7 +39,7 @@ test("useVisualMode should transition to another mode", () => {
   expect(result.current.mode).toBe(SECOND);
 });
 
-test.only("useVisualMode should replace the current mode", () => {
+test("useVisualMode should replace the current mode", () => {
   const { result } = renderHook(() => useVisualMode(FIRST));
 
   act(() => result.current.transition(SECOND));

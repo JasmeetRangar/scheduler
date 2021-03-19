@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 export default function Form(props) {
+	console.log("Form: ", props);
 	const [name, setName] = useState(props.name || "");
 	const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const handleNameChange = (event) => {

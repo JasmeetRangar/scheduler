@@ -34,6 +34,7 @@ const getInterviewersForDay = (state, day) => {
       results.push(interviewers[interviewer]);
     }
   }
+  console.log(results);
   return results;
 }
 export {getAppointmentsForDay, getInterview, getInterviewersForDay}
