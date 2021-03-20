@@ -13,6 +13,7 @@ const getAppointmentsForDay = (state, day) => {
   return results;
 }
 const getInterview = (state, interview) => {
+  console.log("getInterview: ",interview);
   const interviewers = { ... state.interviewers };
   if (!interview) return null;
   const interviewerId = interview.interviewer;

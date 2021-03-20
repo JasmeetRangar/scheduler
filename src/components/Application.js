@@ -3,6 +3,7 @@ import DayList from "components/DayList";
 import "components/Application.scss";
 import "components/Appointment";
 import Appointment from "components/Appointment";
+import useVisualMode from "../hooks/useVisualMode";
 import {
 	getAppointmentsForDay,
 	getInterview,
@@ -12,6 +13,7 @@ import {
 const axios = require("axios");
 
 export default function Application(props) {
+	const { transition } = useVisualMode();
 	const [state, setState] = useState({
 		day: "Monday",
 		days: [],
@@ -37,21 +39,49 @@ export default function Application(props) {
 			})
 			.catch((e) => console.log(e));
 	}, []);
-	function bookInterview(id, interview) {
-		console.log(id, interview);
+	const bookInterview = (id, interview) => {
 		const newAppointment = {
 			...state.appointments[id],
-			interview: { ...interview }
+			interview: { ...interview },
 		};
 		const appointments = {
 			...state.appointments,
-			[id]: newAppointment
+			[id]: newAppointment,
 		};
-		setState({
-			...state, appointments
-		})
-	}
-	
+		console.log("bookinterview: ", interview);
+		console.log("appointments: ", appointments);
+		return axios
+			.put(`http://localhost:8001/api/appointments/${id}`, { interview })
+			.then(() => {
+				setState({
+					...state,
+					appointments,
+				});
+				console.log("after: ", state);
+				//transition("SHOW");
+			})
+			.catch((e) => console.log(e));
+	};
+
+	const cancelInterview = (id) => {
+		const appointment = {
+			...state.appointments[id],
+			interview: null,
+		};
+		const appointments = {
+			...state.appointments,
+			[id]: appointment,
+		};
+
+		axios
+			.delete(`http://localhost:8001/api/appointments/${id}`, {
+				interview: null,
+			})
+			.then(() => {
+				setState({ ...state, appointments });
+			})
+			.catch(e => console.log(e));
+	};
 	return (
 		<main className="layout">
 			<section className="sidebar">
@@ -73,7 +103,6 @@ export default function Application(props) {
 			<section className="schedule">
 				{dailyAppointments.map((appointment) => {
 					const interview = getInterview(state, appointment.interview);
-					console.log("interviewers", state.day);
 					return (
 						<Appointment
 							key={appointment.id}
@@ -82,6 +111,7 @@ export default function Application(props) {
 							interview={interview}
 							interviewers={getInterviewersForDay(state, state.day)}
 							bookInterview={bookInterview}
+							cancelInterview={cancelInterview}
 						/>
 					);
 				})}
