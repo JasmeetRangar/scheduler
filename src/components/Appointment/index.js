@@ -13,12 +13,10 @@ const SAVING = "SAVING";
 const DELETING = "DELETING";
 
 export default function Appointment(props) {
-   let obj = useVisualMode(
-      props.interview ? SHOW : EMPTY
-   );
-   console.log("Index: ", props);
-   console.log("Mode: " ,obj.mode);
-   //console.log("Transition: " , obj.transition);
+	let obj = useVisualMode(props.interview ? SHOW : EMPTY);
+	console.log("Index: ", props);
+	console.log("Mode: ", obj.mode);
+	//console.log("Transition: " , obj.transition);
 
 	function save(name, interviewer) {
 		const interview = {
@@ -26,15 +24,15 @@ export default function Appointment(props) {
 			interviewer,
 		};
 		obj.transition(SAVING);
-		props.bookInterview(props.id, interview)
-      .then(() => obj.transition(SHOW))      
-      //obj.transition(SHOW);
+		props.bookInterview(props.id, interview).then(() => obj.transition(SHOW));
+		//obj.transition(SHOW);
 	}
 	function deleteInterview() {
 		obj.transition(DELETING);
-		props.cancelInterview(props.id, transition)
-		.then(() => obj.transition(EMPTY));
- }
+		props
+			.cancelInterview(props.id, transition)
+			.then(() => obj.transition(EMPTY));
+	}
 	return (
 		<article className="appointment">
 			<Header time={props.time} />
@@ -43,6 +41,7 @@ export default function Appointment(props) {
 				<Show
 					student={props.interview.student}
 					interviewer={props.interview.interviewer}
+					deleteInterview={deleteInterview}
 				/>
 			)}
 			{obj.mode === CREATE && (
@@ -53,6 +52,7 @@ export default function Appointment(props) {
 				/>
 			)}
 			{obj.mode === SAVING && <Status message="Saving" />}
+			{mode === DELETING && <Status message="Deleting" />}
 		</article>
 	);
 }
