@@ -48,8 +48,8 @@ export default function Application(props) {
 			...state.appointments,
 			[id]: newAppointment,
 		};
-		console.log("bookinterview: ", interview);
-		console.log("appointments: ", appointments);
+		//console.log("bookinterview: ", interview);
+		//console.log("appointments: ", appointments);
 		return axios
 			.put(`http://localhost:8001/api/appointments/${id}`, { interview })
 			.then(() => {
@@ -57,8 +57,6 @@ export default function Application(props) {
 					...state,
 					appointments,
 				});
-				console.log("after: ", state);
-				//transition("SHOW");
 			})
 			.catch((e) => console.log(e));
 	};
@@ -73,10 +71,8 @@ export default function Application(props) {
 			[id]: appointment,
 		};
 
-		axios
-			.delete(`http://localhost:8001/api/appointments/${id}`, {
-				interview: null,
-			})
+		return axios
+			.delete(`http://localhost:8001/api/appointments/${id}`)
 			.then(() => {
 				setState({ ...state, appointments });
 			})

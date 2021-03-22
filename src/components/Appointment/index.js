@@ -15,7 +15,7 @@ const DELETING = "DELETING";
 export default function Appointment(props) {
 	let obj = useVisualMode(props.interview ? SHOW : EMPTY);
 	console.log("Index: ", props);
-	console.log("Mode: ", obj.mode);
+	//console.log("Mode: ", obj.mode);
 	//console.log("Transition: " , obj.transition);
 
 	function save(name, interviewer) {
@@ -29,8 +29,9 @@ export default function Appointment(props) {
 	}
 	function deleteInterview() {
 		obj.transition(DELETING);
+		console.log("delete props: ", props)
 		props
-			.cancelInterview(props.id, transition)
+			.cancelInterview(props.id)
 			.then(() => obj.transition(EMPTY));
 	}
 	return (
@@ -52,7 +53,7 @@ export default function Appointment(props) {
 				/>
 			)}
 			{obj.mode === SAVING && <Status message="Saving" />}
-			{mode === DELETING && <Status message="Deleting" />}
+			{obj.mode === DELETING && <Status message="Deleting" />}
 		</article>
 	);
 }
