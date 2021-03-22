@@ -20,7 +20,7 @@ export default function Header(props) {
         className="appointment__actions-button"
         src="images/trash.png"
         alt="Delete"
-        onClick={props.deleteInterview}
+        onClick={props.onDelete}
       />
     </section>
   </section>
