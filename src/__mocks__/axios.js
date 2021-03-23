@@ -54,31 +54,31 @@ const fixtures = {
   
 };
 export default {
+  //defaults: { baseURL: "http://localhost:8001" },
   get: jest.fn(url => {
-    if (url === "/api/days") {
-      return Promise.resolve({
-        status: 200,
-        statusText: "OK",
-        data: fixtures.days
-      });
-    }
+    console.log("Here");
+    const days = Promise.resolve({
+      status: 200,
+      statusText: "OK",
+      data: fixtures.days
+    });
+    const appointments = Promise.resolve({
+      status: 200,
+      statusText: "OK",
+      data: fixtures.appointments
+    });
+    const interviewers = Promise.resolve({
+      status: 200,
+      statusText: "OK",
+      data: fixtures.interviewers
+    });
 
-    if (url === "/api/appointments") {
-      /* Resolve appointments data */
-      return Promise.resolve({
-        status: 200,
-        statusText: "OK",
-        data: fixtures.appointments
-      });
-    }
-
-    if (url === "/api/interviewers") {
-      /* Resolve interviewers data */
-      return Promise.resolve({
-        status: 200,
-        statusText: "OK",
-        data: fixtures.interviewers
-      });
-    }
+    const response = {
+      "http://localhost:8001/api/days": days,
+      "http://localhost:8001/api/appointments": appointments,
+      "http://localhost:8001/api/interviewers": interviewers
+    };
+    console.log("-----URL: ", url);
+    return response[url];
   })
 }
