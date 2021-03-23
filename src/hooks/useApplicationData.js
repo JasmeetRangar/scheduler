@@ -44,8 +44,6 @@ export default function useApplicationData() {
 			[id]: newAppointment,
 		};
 		const days = updateSpots(id, true);
-		console.log("bookinterview: ", interview);
-		//console.log("appointments: ", appointments);
 		return axios
 			.put(`http://localhost:8001/api/appointments/${id}`, { interview })
 			.then(() => {

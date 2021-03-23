@@ -14,7 +14,6 @@ const getAppointmentsForDay = (state, day) => {
 	return results;
 };
 const getInterview = (state, interview) => {
-	console.log("getInterview: ", interview);
 	const interviewers = { ...state.interviewers };
 	if (!interview) return null;
 	const interviewerId = interview.interviewer;
@@ -37,7 +36,6 @@ const getInterviewersForDay = (state, day) => {
 			results.push(interviewers[interviewer]);
 		}
 	}
-	console.log(results);
 	return results;
 };
 export { getAppointmentsForDay, getInterview, getInterviewersForDay };
