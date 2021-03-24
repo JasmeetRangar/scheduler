@@ -64,10 +64,7 @@ describe("Application", () => {
 		const appointment = getAllByTestId(container, "appointment").find(
 			appointment => queryByText(appointment, "Archie Cohen")
 		);
-		const day2 = getAllByTestId(container, "day").find(day =>
-			queryByText(day, "Monday")
-		);
-		console.log("!!!!!Day before: ", prettyDOM(day2))	
+		
 		fireEvent.click(queryByAltText(appointment, "Delete"));
 	
 		// 4. Check that the confirmation message is shown.
@@ -88,8 +85,31 @@ describe("Application", () => {
 		const day = getAllByTestId(container, "day").find(day =>
 			queryByText(day, "Monday")
 		);
-		console.log("!!!!!Day after: ", prettyDOM(day))
 		expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
 	});
+	it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
+    const { container, debug } = render(<Application />);
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+    const appointment = getAllByTestId(container, "appointment")
+      .find(appointment => queryByText(appointment, "Archie Cohen"));
+			const day2 = getAllByTestId(container, "day").find(day =>
+				queryByText(day, "Monday")
+			);
+
+    fireEvent.click(getByAltText(appointment, "Edit"));
+    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+      target: { value: "Lydia Miller-Jones" }
+    });
+    fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
+    fireEvent.click(getByText(appointment, "Save"));
+
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
+    await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
+    expect(getByText(appointment, "Sylvia Palmer")).toBeInTheDocument();
+    const day = getAllByTestId(container, "day")
+    .find(day => queryByText(day, "Monday"));
+
+    expect(getByText(day, /1 spot remaining/i)).toBeInTheDocument();
+  });
 	
 });

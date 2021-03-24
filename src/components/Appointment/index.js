@@ -28,8 +28,9 @@ export default function Appointment(props) {
 			student: name,
 			interviewer,
 		};
+		const isEdit = (mode === EDIT) ? true : false;
 		transition(SAVING);
-		props.bookInterview(props.id, interview).then(() => { 
+		props.bookInterview(props.id, interview, isEdit).then(() => { 
 			transition(SHOW)})
 			.catch(() => transition("ERROR_SAVE"));
 		//transition(SHOW);
