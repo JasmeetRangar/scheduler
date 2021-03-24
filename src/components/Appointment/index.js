@@ -29,9 +29,7 @@ export default function Appointment(props) {
 			interviewer,
 		};
 		transition(SAVING);
-		console.log("Looking: ", interview);
 		props.bookInterview(props.id, interview).then(() => { 
-			console.log("Booked: ", props.interview);
 			transition(SHOW)})
 			.catch(() => transition("ERROR_SAVE"));
 		//transition(SHOW);
@@ -44,7 +42,7 @@ export default function Appointment(props) {
 	}
 
 	return (
-		<article className="appointment">
+		<article className="appointment" data-testid="appointment">
 			<Header time={props.time} />
 			{mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
 			{mode === SHOW && (

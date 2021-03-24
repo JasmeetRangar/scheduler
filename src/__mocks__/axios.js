@@ -56,7 +56,6 @@ const fixtures = {
 export default {
   //defaults: { baseURL: "http://localhost:8001" },
   get: jest.fn(url => {
-    console.log("Here");
     const days = Promise.resolve({
       status: 200,
       statusText: "OK",
@@ -78,7 +77,18 @@ export default {
       "http://localhost:8001/api/appointments": appointments,
       "http://localhost:8001/api/interviewers": interviewers
     };
-    console.log("-----URL: ", url);
     return response[url];
+  }),
+  put: jest.fn(() => {
+    return Promise.resolve({
+      status: 204,
+      statusText: "No Content"
+    });
+  }),
+  delete: jest.fn(() => {
+    return Promise.resolve({
+      status: 204,
+      statusText: "No Content"
+    });
   })
 }
