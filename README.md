@@ -1,5 +1,21 @@
 # Interview Scheduler
 
+## Go to Day to See appointments
+
+![]()
+
+## Book new appointment
+
+![]()
+
+## Edit appointment
+
+![]()
+
+## Delete appointment
+
+![]()
+
 ## Setup
 
 Install dependencies with `npm install`.
