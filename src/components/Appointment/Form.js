@@ -2,23 +2,25 @@ import React, { useState } from "react";
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 export default function Form(props) {
+	//Declare states
 	const [error, setError] = useState("");
 	const [name, setName] = useState(props.name || "");
 	const [interviewer, setInterviewer] = useState(props.interviewer || null);
+	//Input field listener
 	const handleNameChange = (event) => {
 		setName(event.target.value);
 	};
+	//Resets input field and selected interviewer
 	const reset = () => {
 		setName("");
 		setInterviewer(null);
 	};
+	//Handles cancel click event
 	const cancel = () => {
 		reset();
 		props.onCancel();
 	};
-	const save = () => {
-		props.onSave(name, interviewer);
-	};
+	//Validate and handle save click event
 	const validate = () => {
     if (name === "") {
       setError("Student name cannot be blank");

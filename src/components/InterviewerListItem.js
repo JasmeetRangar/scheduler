@@ -5,6 +5,10 @@ export default function InterviewerListItem(props) {
   const InterviewerListItem = classnames("interviewers__item", {
     "interviewers__item--selected":props.selected,
   });
+  /**
+   * Checks if selected returns name to display
+   * @returns Name of interviewer
+   */
   const getName = () => {
   if(props.selected) {
     return props.name;

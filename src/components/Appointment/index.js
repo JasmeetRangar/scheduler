@@ -19,10 +19,9 @@ const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 export default function Appointment(props) {
 	const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
-	//console.log("Index: ", props);
-	//console.log("Mode: ", mode);
-	//console.log("Transition: " , transition);
-
+	/**
+	 * Handles save, checks if edit or new and transition accordingly
+	 */
 	function save(name, interviewer) {
 		const interview = {
 			student: name,
@@ -33,11 +32,9 @@ export default function Appointment(props) {
 		props.bookInterview(props.id, interview, isEdit).then(() => { 
 			transition(SHOW)})
 			.catch(() => transition("ERROR_SAVE"));
-		//transition(SHOW);
 	}
 	function deleteInterview() {
 		transition(DELETING, true);
-		//console.log("delete props: ", props);
 		props.cancelInterview(props.id).then(() => transition(EMPTY))
 		.catch(() => transition("ERROR_DELETE", true));
 	}

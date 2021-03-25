@@ -3,6 +3,9 @@ import "./InterviewerList.scss";
 import InterviewerListItem from "components/InterviewerListItem";
 import PropTypes from "prop-types";
 function InterviewerList(props) {
+	/**
+	 * Maps over interviewers to get individual interviewer element
+	 */
 	const interviewers = props.interviewers.map((interviewer) => {
 		return <InterviewerListItem
 				key={interviewer.id}
@@ -13,7 +16,6 @@ function InterviewerList(props) {
 			/>
 		
 	});
-	//console.log(interviewers);
 	return (
 		<section className="interviewers">
 			<h4 className="interviewers__header text--light">Interviewer</h4>

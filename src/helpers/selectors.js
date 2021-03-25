@@ -1,3 +1,9 @@
+/**
+ * 
+ * @param {current state} state 
+ * @param {day to fetch} day 
+ * @returns All appointments for selected day
+ */
 const getAppointmentsForDay = (state, day) => {
 	const days = [...state.days];
 	const appointments = { ...state.appointments };
@@ -13,6 +19,12 @@ const getAppointmentsForDay = (state, day) => {
 
 	return results;
 };
+/**
+ * 
+ * @param {current state} state 
+ * @param {} interview 
+ * @returns if booking exists return interview
+ */
 const getInterview = (state, interview) => {
 	const interviewers = { ...state.interviewers };
 	if (!interview) return null;
@@ -24,6 +36,12 @@ const getInterview = (state, interview) => {
 	}
 	return null;
 };
+/**
+ * 
+ * @param {current state} state 
+ * @param {selected day} day 
+ * @returns All interviews for selected day 
+ */
 const getInterviewersForDay = (state, day) => {
 	const days = [...state.days];
 	const interviewers = { ...state.interviewers };

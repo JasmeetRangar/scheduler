@@ -2,6 +2,9 @@ import React from "react";
 import DayListItem from "components/DayListItem";
 
 export default function DayList(props) {
+  /**
+   * Maps over days to get individual day element
+   */
   const days = props.days.map((day) => {
     return <DayListItem 
     key={day.id}

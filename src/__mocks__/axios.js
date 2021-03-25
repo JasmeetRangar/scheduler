@@ -54,7 +54,6 @@ const fixtures = {
   
 };
 export default {
-  //defaults: { baseURL: "http://localhost:8001" },
   get: jest.fn(url => {
     const days = Promise.resolve({
       status: 200,
