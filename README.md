@@ -2,19 +2,19 @@
 
 ## Go to Day to See appointments
 
-![]()
+![days](https://github.com/JasmeetRangar/scheduler/blob/master/docs/days.JPG)
 
 ## Book new appointment
 
-![]()
+![new](https://github.com/JasmeetRangar/scheduler/blob/master/docs/new.JPG)
 
 ## Edit appointment
 
-![]()
+![edit](https://github.com/JasmeetRangar/scheduler/blob/master/docs/edit.JPG)
 
 ## Delete appointment
 
-![]()
+![delete](https://github.com/JasmeetRangar/scheduler/blob/master/docs/delete.JPG)
 
 ## Setup
 
