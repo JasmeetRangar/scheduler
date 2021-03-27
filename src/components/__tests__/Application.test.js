@@ -135,7 +135,6 @@ describe("Application", () => {
 		expect(getByText(appointment, "Saving")).toBeInTheDocument();
 
 		await waitForElement(() => getByText(appointment, "Error"));
-
 		expect(
 			getByText(appointment, /Could not save appointment/i)
 		).toBeInTheDocument();

@@ -72,9 +72,9 @@ export default {
     });
 
     const response = {
-      "http://localhost:8001/api/days": days,
-      "http://localhost:8001/api/appointments": appointments,
-      "http://localhost:8001/api/interviewers": interviewers
+      "/api/days": days,
+      "/api/appointments": appointments,
+      "/api/interviewers": interviewers
     };
     return response[url];
   }),
