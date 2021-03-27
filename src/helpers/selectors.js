@@ -26,15 +26,15 @@ const getAppointmentsForDay = (state, day) => {
  * @returns if booking exists return interview
  */
 const getInterview = (state, interview) => {
-	const interviewers = { ...state.interviewers };
-	if (!interview) return null;
-	const interviewerId = interview.interviewer;
-	for (const interviewer in interviewers) {
-		if (interviewers[interviewer]["id"] === interviewerId) {
-			return { ...interview, interviewer: interviewers[interviewer] };
-		}
-	}
-	return null;
+	if (interview === null) {
+    return null
+  } else {
+
+    return {
+      student: interview.student,
+      interviewer: state.interviewers[interview.interviewer]
+    }
+  }
 };
 /**
  * 
