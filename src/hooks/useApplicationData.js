@@ -10,43 +10,26 @@ export default function useApplicationData() {
 		interviewers: {},
 		interviewersForDay: [],
 	});
-	//Fetch data from API
-	useEffect(() => {
-		Promise.all([
-			axios.get("http://localhost:8001/api/days"),
-			axios.get("http://localhost:8001/api/appointments"),
-			axios.get("http://localhost:8001/api/interviewers"),
-		])
-			.then((data) => {
-				setState((prev) => ({
-					...prev,
-					days: data[0].data,
-					appointments: data[1].data,
-					interviewers: data[2].data,
-				}));
-			})
-			.catch((e) => console.log(e));
-	}, []);
 	/**
-	 * 
-	 * @param {appointment id} id 
-	 * @param {Boolean} isBooking 
-	 * @returns updated days with correct spots, -1 on new, +1 on delete, no change on edit 
+	 * @param {appointment id} id
+	 * @param {Boolean} isBooking
+	 * @returns updated days with correct spots, -1 on new, +1 on delete, no change on edit
 	 */
 	function updateSpots(id, isBooking) {
-    const days = [ ...state.days ];
-    for (const day of days) {
-      if (day.appointments.includes(id)) {
-        (isBooking) ? day.spots-- : day.spots++;
-      }
-    }
-    return days;
-  }
+		const days = [...state.days];
+		// for (const day of days) {
+		//   if (day.appointments.includes(id)) {
+		//     (isBooking) ? day.spots-- : day.spots++;
+		//   }
+		// }
+
+		return days;
+	}
 	/**
-	 * 
-	 * @param {appointment id} id 
-	 * @param {*} interview 
-	 * @param {Boolean} isEdit 
+	 *
+	 * @param {appointment id} id
+	 * @param {*} interview
+	 * @param {Boolean} isEdit
 	 * @returns updated state after new/edit interview
 	 */
 	const bookInterview = (id, interview, isEdit) => {
@@ -58,7 +41,7 @@ export default function useApplicationData() {
 			...state.appointments,
 			[id]: newAppointment,
 		};
-		const days = isEdit ? [ ...state.days ] : updateSpots(id, true); 
+		const days = isEdit ? [...state.days] : updateSpots(id, true);
 		return axios
 			.put(`http://localhost:8001/api/appointments/${id}`, { interview })
 			.then(() => {
@@ -69,11 +52,10 @@ export default function useApplicationData() {
 				});
 			});
 	};
-	
+
 	const setDay = (day) => setState((prev) => ({ ...prev, day }));
 	/**
-	 * 
-	 * @param {appointment id} id 
+	 * @param {appointment id} id
 	 * @returns updated state after cancelled interview
 	 */
 	const cancelInterview = (id) => {
@@ -92,6 +74,23 @@ export default function useApplicationData() {
 				setState({ ...state, days, appointments });
 			});
 	};
+	//Fetch data from API
+	useEffect(() => {
+		Promise.all([
+			axios.get("http://localhost:8001/api/days"),
+			axios.get("http://localhost:8001/api/appointments"),
+			axios.get("http://localhost:8001/api/interviewers"),
+		])
+			.then((data) => {
+				setState((prev) => ({
+					...prev,
+					days: data[0].data,
+					appointments: data[1].data,
+					interviewers: data[2].data,
+				}));
+			})
+			.catch((e) => console.log(e));
+	}, []);
 	return {
 		state,
 		setDay,

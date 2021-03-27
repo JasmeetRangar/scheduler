@@ -1,6 +1,17 @@
 import React from "react";
 import "components/DayListItem.scss";
 let classnames = require("classnames");
+const formatSpots = (spots) => {
+  if (spots === 0) {
+    return "no spots remaining";
+  }
+  else if (spots === 1) {
+    return spots + " spot remaining";
+  }
+  else {
+    return spots + " spots remaining";
+  }
+}
 export default function DayListItem(props) {
 	const dayListItemClass = classnames("day-list__item", {
 		"day-list__item--selected": props.selected,
@@ -11,17 +22,6 @@ export default function DayListItem(props) {
    * @param {number of remaining spots} spots 
    * @returns output string
    */
-  const formatSpots = (spots) => {
-    if (spots === 0) {
-      return "no spots remaining";
-    }
-    else if (spots === 1) {
-      return spots + " spot remaining";
-    }
-    else {
-      return spots + " spots remaining";
-    }
-  }
   const spotsRemaining = formatSpots(props.spots);
 	return (
 		<li className={dayListItemClass} onClick={() => props.setDay(props.name)}  data-testid="day">
