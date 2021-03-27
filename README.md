@@ -19,7 +19,7 @@
 ## Setup
 
 Install dependencies with `npm install`.
-Install backend API [a link](https://github.com/JasmeetRangar/scheduler-api)
+Install backend API [Scheduler API](https://github.com/JasmeetRangar/scheduler-api)
 
 ## Running Webpack Development Server
 
